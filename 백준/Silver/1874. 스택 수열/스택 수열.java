@@ -4,22 +4,11 @@ public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
-        int data = 1;
-        int popcount = 0;
-        int num;
+        int data = 1, popcount = 0, num;
 
         Stack<Integer> stack = new Stack<>(); //int형 스택 선언
         List<String> result = new ArrayList<>();
         
-        num = sc.nextInt();
-        for(; data<=num; data++){
-            stack.push(data);
-            result.add("+");
-        }
-        stack.pop();
-        result.add("-");
-        popcount++;
-
         while(popcount != n) {
             num = sc.nextInt();            
             if(!stack.empty()){
@@ -54,8 +43,6 @@ public class Main {
                 popcount++;
             }
         }
-
         for(String s:result) System.out.println(s);
-        sc.close();
     }
 }
