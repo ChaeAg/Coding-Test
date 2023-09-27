@@ -2,32 +2,58 @@ import java.util.*;
 import java.io.*;
 
 public class Main {
-    public static void main(String[] args) throws Exception {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringTokenizer st = new StringTokenizer(br.readLine());
-        StringBuilder sb = new StringBuilder();
+	static int N, K, M;
+	static StringTokenizer st;
+	static ArrayList<Integer> num;
+	static StringBuilder sb;
+    public static void main(String[] args) throws IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		st = new StringTokenizer(br.readLine());
+		num = new ArrayList<>();
+		sb = new StringBuilder();
 
-        int N = Integer.parseInt(st.nextToken());
-        int K = Integer.parseInt(st.nextToken());
+		N = Integer.parseInt(st.nextToken());
+		K = Integer.parseInt(st.nextToken());
+		M = Integer.parseInt(st.nextToken());
+		int idx = -1, count = 0;
 
-        List<Integer> list = new ArrayList<>();
-        int listidx = 0;
+		for(int i=1; i<=N; i++) {
+			num.add(i);
+		}
 
-        for(int i=1; i<=N; i++) list.add(i);
+		while(!num.isEmpty()) {
+			for(int i=0; i<K; i++) {
+				idx++;
+				if(idx >= num.size()) {
+					idx = 0;
+				}
+			}
+			sb.append(num.get(idx)).append("\n");
+			num.remove(idx);
+			count++;
 
-        sb.append("<");
-        while(!list.isEmpty()) {
-            if(listidx + K <= list.size()){
-                listidx = listidx + K -1;
-            } 
-            else {
-                listidx = (listidx + K - 1) % list.size();
-            }
-            if(list.size() == 1) sb.append(list.get(listidx)).append(">");
-            else sb.append(list.get(listidx)).append(", ");
-            list.remove(listidx);
-        }
+			if(count == M) {
+				idx = Backwards(idx);
+				count = 0;
+			}
+			idx--;
+		}
 
-        System.out.println(sb);
-    }
+		System.out.println(sb);
+	}
+	private static int Backwards(int idx){
+		int count = 0;
+		while(!num.isEmpty() && count < M) {
+			for(int i=0; i<K; i++) {
+				idx--;
+				if(idx < 0) {
+					idx = num.size()-1;
+				}
+			}
+			sb.append(num.get(idx)).append("\n");
+			num.remove(idx);
+			count++;
+		}
+		return idx;
+	}
 }
