@@ -16,11 +16,12 @@ public class Main {
 
 		String str;
 		while((str = br.readLine()) != null) {
-			if(str.contains(" ")) {
-				map.put(str.split(" ")[0], str.split(" ")[1]);
+			String [] a = str.split(" ");
+			if(a.length == 2) {
+				map.put(a[0], a[1]);
 			}
 			else {
-				sb.append(map.get(str.split(" ")[0])).append("\n");
+				sb.append(map.get(a[0])).append("\n");
 			}
 		}
 
