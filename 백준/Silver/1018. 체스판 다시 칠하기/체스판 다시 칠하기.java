@@ -14,35 +14,32 @@ public class Main {
                 String[][] arr = new String[column][row];
 
                 for(int i=0; i<column; i++) {
-                        String str = br.readLine();
-                        for(int j=0; j<row; j++) {
-                                arr[i][j] = str.substring(j, j+1);
-                        }
+                    String str = br.readLine();
+                    for(int j=0; j<row; j++) {
+                        arr[i][j] = str.substring(j, j+1);
+                    }
                 }
 
                 int[] changeCount = new int[(column-7) * (row-7) * 2];
                 int idx=0;
 
                 for(int s=0; s<=column-8; s++) {
-                                for(int i=0; i<=row-8; i++) {
-                                        String color = "W";
-                                        for(int j=0; j<2; j++) {
-                                                for(int p=i; p<i+8; p++) {
-                                                        for(int k=s; k<s+8; k++) {
-                                                                if(!arr[k][p].equals(color)) {
-                                                                        changeCount[idx]++;
-                                                                }
-                                                                if(color.equals("W")) color = "B";
-                                                                else color = "W";
-                                                        }
-                                                        if(color.equals("W")) color = "B";
-                                                        else color = "W";
-                                                }
-                                                color = "B";
-                                                idx++;
-                                        }  
+                    for(int i=0; i<=row-8; i++) {
+                        String color = "W";
+                        for(int j=0; j<2; j++) {
+                            for(int p=i; p<i+8; p++) {
+                                for(int k=s; k<s+8; k++) {
+                                    if(!arr[k][p].equals(color)) changeCount[idx]++;
+                                    if(k == s+7) continue;
+                                    if(color.equals("W")) color = "B";
+                                    else color = "W";
                                 }
-                        }
-                        System.out.print(Arrays.stream(changeCount).min().getAsInt());
+                            }
+                            color = "B";
+                            idx++;
+                        }  
+                    }
+                }
+                System.out.print(Arrays.stream(changeCount).min().getAsInt());
         }
 }
