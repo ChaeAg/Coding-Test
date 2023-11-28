@@ -5,10 +5,9 @@ public class Solution {
         List<Integer> list = new ArrayList();
         list.add(arr[0]);
         
-        for(int i=1; i<arr.length; i++) {
-            if(list.get(list.size()-1) == arr[i]) continue;
-            list.add(arr[i]);
-        }
+        Arrays.stream(arr)
+            .filter(i -> list.get(list.size()-1) != i)
+            .forEach(i -> list.add(i));
         
         return list;
     }
