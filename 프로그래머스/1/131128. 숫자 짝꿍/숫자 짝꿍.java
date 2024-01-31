@@ -24,21 +24,9 @@ class Solution {
         
         if(result.size() == 0) answer = "-1";
         else {
-            // 짝꿍이 0으로만 구성되어 있는지 확인
-            boolean b = true;
-            for(String s : result) {
-                if(!s.equals("0")) {
-                    b = false;
-                    break;
-                }
-            }
-            if(b) {
-                answer = "0";
-            }
-            else {
-                result.sort(Comparator.reverseOrder());
-                answer = String.join("", result);
-            }
+            result.sort(Comparator.reverseOrder());
+            if(result.get(0).equals("0")) answer = "0";
+            else answer = String.join("", result);
         }
         
         return answer;
