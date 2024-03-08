@@ -4,7 +4,7 @@ class Solution {
         int sum = 0;
         int start = 1;
         int idx = 1;
-        while(start<=n) {
+        while(start <= n) {
             sum += idx++;
             if(sum >= n) {
                 if(sum == n) answer++;
