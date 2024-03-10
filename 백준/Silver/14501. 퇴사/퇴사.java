@@ -26,15 +26,11 @@ public class Main {
             int nextDay = i + schedules[i][0];
 
             if(nextDay <= N) {
-                if(i > 0 && money[i] == 0) {
-                    money[i] = money[i-1];
-                }
-
                 if(money[nextDay] < money[i] + schedules[i][1]) {
                     money[nextDay] = money[i] + schedules[i][1];
                 }
             }
-
+            
             if(money[i+1] < money[i]) money[i+1] = money[i];
         }
     }
