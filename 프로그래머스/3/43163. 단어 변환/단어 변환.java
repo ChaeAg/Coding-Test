@@ -16,20 +16,21 @@ class Solution {
     }
     
     public void dfs(int count, String begin) {
-        if(begin.equals(target)) {
+        if(begin.equals(target)) { // 단어가 target과 같아졌을 경우
             if(answer == 0) answer = count;
             else answer = answer > count ? count : answer;
             return;
         }
 
-        for(int i=0; i<words.length; i++) {
-            if(words[i].equals(begin) || visited[i]) continue;
+        for(int i=0; i<words.length; i++) { // words 전체를 돈다.
+            if(words[i].equals(begin) || visited[i]) continue; // 같은 단어거나, 이미 방문했던 단어면 패스
 
+            // 문자열 자리마다 비교하기 위해 char배열로 변환
             char[] c_begin = begin.toCharArray();
             char[] c_word = words[i].toCharArray();
-            int different_count = 0;
+            int different_count = 0; // 두 문자열의 다른 자리 수 세는 용도
 
-            for(int j=0; j<word_len; j++) {
+            for(int j=0; j<word_len; j++) { // 두 문자열 비교 시작 
                 if(c_begin[j] != c_word[j]) different_count++;
 
                 if(different_count > 1) break;
