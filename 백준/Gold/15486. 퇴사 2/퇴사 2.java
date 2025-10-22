@@ -20,14 +20,16 @@ class Main {
 
         for (int i = 1; i <= N; i++) {
             int next_m = arr[i][1];
-            
+
             if (dp[i] != 0) { // 더해서 시작할 수 있다는 뜻
                 next_m += dp[i];
-                for (int d = i + 1; d < Math.min(i + arr[i][0], N + 1); d++) {
-                    dp[d] = Math.max(dp[d], dp[i]);
-                }
+//                for (int d = i + 1; d < Math.min(arr[i][0] + i, N + 1); d++) {
+//                    dp[d] = Math.max(dp[d], dp[i]);
+//                }
+
+                dp[i + 1] = Math.max(dp[i], dp[i + 1]);
             }
-            
+
             int next_d = i + arr[i][0];
 
             if (next_d <= N + 1 && dp[next_d] < next_m) { // 이득이라서 덮어씌우기
