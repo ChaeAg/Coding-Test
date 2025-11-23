@@ -70,12 +70,18 @@ class Solution {
     List<List<String>> results = new ArrayList<>();
     Map<String, List<String>> connect = new HashMap<>();
     int result_len_format;
+    boolean found = false;
     
     public String[] solution(String[][] tickets) {
         result_len_format = tickets.length + 1; // 항공권이 n개일때 경로의 방문 나라 수는 n+1개다.
         
         for(String[] strs : tickets) {
             connect.computeIfAbsent(strs[0], k -> new ArrayList<>()).add(strs[1]);
+        }
+        
+        // AI가 알려줌!! 효율적인 sort
+        for(String key : connect.keySet()) {
+            Collections.sort(connect.get(key));
         }
         
         String[] str = new String[result_len_format]; // 출발지 ICN 세팅
@@ -89,33 +95,21 @@ class Solution {
             */
             
             connect.get("ICN").remove(connect_contry); // ICN -> {connect_contry} 항공권 사용
-
             dfs(connect_contry, 1, str);
-            
             connect.get("ICN").add(connect_contry); // 항공권 복구
         }
-        
-        results.sort((list1, list2) -> {
-            for(int i=0; i<list1.size(); i++) {
-                String str1 = list1.get(i);
-                String str2 = list2.get(i);
-                
-                int com = str1.compareTo(str2);
-                
-                if(com != 0) return com;
-            }
-            
-            return 0;
-        });
         
         return results.get(0).toArray(new String[result_len_format]);
     }
     
     public void dfs(String now_country, int use_count, String[] result) {
+        if(found) return;
+        
         result[use_count] = now_country;
         
         if(use_count >= result_len_format - 1) {
             results.add(List.of(result));
+            found = true;
             return;
         }
         
