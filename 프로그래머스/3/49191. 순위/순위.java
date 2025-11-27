@@ -25,7 +25,7 @@ class Solution {
                 for(int winner : winnerSet) {
                     // dfs
                     visited = new boolean[n+1];
-                    dfsWinner(winner, spreadSet);
+                    dfs(winner, spreadSet, true);
                 }
                 
                 winnerSet.addAll(spreadSet);
@@ -39,7 +39,7 @@ class Solution {
                 for(int loser : loserSet) {
                     // dfs
                     visited = new boolean[n+1];
-                    dfsLoser(loser, spreadSet);
+                    dfs(loser, spreadSet, false);
                 }
                 
                 loserSet.addAll(spreadSet);
@@ -59,31 +59,21 @@ class Solution {
         return answer;
     }
     
-    void dfsWinner(int winner, Set<Integer> spreadSet) {
-        visited[winner] = true;
+    void dfs(int node, Set<Integer> spreadSet, boolean isWinner) {
+        visited[node] = true;
         
-        Set<Integer> winnerFromWinnerSet = loserOwnerMap.get(winner);
-        if(winnerFromWinnerSet == null) return;
+        Set<Integer> set = new HashSet();
         
-        for(int i : winnerFromWinnerSet) {
+        if(isWinner) set = loserOwnerMap.get(node);
+        else set = winnerOwnerMap.get(node);
+        
+        if(set == null) return;
+        
+        for(int i : set) {
             if(visited[i]) continue;
             
             spreadSet.add(i);
-            dfsWinner(i, spreadSet);
-        }
-    }
-                   
-    void dfsLoser(int loser, Set<Integer> spreadSet) {
-        visited[loser] = true;
-        
-        Set<Integer> loserFromLoserSet = winnerOwnerMap.get(loser);
-        if(loserFromLoserSet == null) return;
-        
-        for(int i : loserFromLoserSet) {
-            if(visited[i]) continue;
-            
-            spreadSet.add(i);
-            dfsLoser(i, spreadSet);
+            dfs(i, spreadSet, isWinner);
         }
     }
 }
