@@ -8,9 +8,6 @@ import java.util.StringTokenizer;
 public class Main {
     static int[][] moneys;
     static int N, M, X;
-    static boolean[] visited;
-    static int minDist;
-
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
