@@ -1,6 +1,6 @@
 # [level 3] 가장 긴 팰린드롬 - 12904 
 
-[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/12904#) 
+[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/12904) 
 
 ### 성능 요약
 
@@ -16,7 +16,7 @@
 
 ### 제출 일자
 
-2026년 01월 27일 08:37:32
+2026년 01월 27일 08:38:04
 
 ### 문제 설명
 
