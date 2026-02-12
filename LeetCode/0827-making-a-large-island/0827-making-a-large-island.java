@@ -3,6 +3,7 @@ class Solution {
     public int largestIsland(int[][] grid) {
         int n = grid.length;
         int[][] moves = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
+        int maxSize = 0;
 
         int[][] number = new int[n][n];
         Map<Integer, Integer> numberWithSize = new HashMap<>();
@@ -39,15 +40,11 @@ class Solution {
                     }
 
                     numberWithSize.put(numSeq, size);
+                    maxSize = Math.max(maxSize, size);
                 }
             }
         }
 
-        int maxSize = 0;
-        for(int s : numberWithSize.values()) {
-            maxSize = Math.max(maxSize, s);
-        }
-        
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
                 if(grid[i][j] == 1) continue;
