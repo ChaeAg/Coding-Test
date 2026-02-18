@@ -17,8 +17,7 @@ class Solution { // 전위순회
     int low, high;
     int sum = 0;
     public int rangeSumBST(TreeNode root, int low, int high) {
-        this.low = low;
-        this.high = high;
+        this.low = low; this.high = high;
         traversal(root);
         return sum;
     }
