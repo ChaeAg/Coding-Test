@@ -4,7 +4,7 @@ INNER JOIN (
     SELECT ID, FISH_TYPE, 
         (
             CASE 
-            WHEN LENGTH IS NULL THEN 10
+            WHEN LENGTH IS NULL OR LENGTH < 10 THEN 10
             ELSE LENGTH 
             END
         ) AS L
