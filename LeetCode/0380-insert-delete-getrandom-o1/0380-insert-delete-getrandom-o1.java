@@ -1,31 +1,35 @@
 import java.util.*;
 class RandomizedSet {
 
+    private Random random;
     private Map<Integer, Integer> map;
+    private List<Integer> keys;
 
     public RandomizedSet() {
         map = new HashMap<>();
+        keys = new ArrayList<>();
+        random = new Random();
     }
     
     public boolean insert(int val) {
-        if(map.containsKey(val)) {
+		if (map.put(val, 1) == null) {
+		    keys.add(val);
+		    return true;
+		}
+		return false;
+	}
+    
+    public boolean remove(int val) {
+        if(map.remove(val) == null) {
             return false;
         }
-        map.put(val, 1);
+        keys.remove((Integer)val);
         return true;
     }
     
-    public boolean remove(int val) {
-       if(map.containsKey(val)) {
-            map.remove(val);
-            return true;
-        } 
-        return false;
-    }
-    
     public int getRandom() {
-        List<Integer> keys = List.copyOf(map.keySet());
-        return keys.get((int)(Math.random() * keys.size()));
+        int idx = random.nextInt(keys.size());
+        return keys.get(idx);
     }
 }
 
