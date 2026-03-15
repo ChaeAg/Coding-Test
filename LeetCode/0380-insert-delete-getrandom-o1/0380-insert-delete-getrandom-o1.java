@@ -12,7 +12,7 @@ class RandomizedSet {
     }
     
     public boolean insert(int val) {
-		if (map.put(val, 1) == null) {
+		if (map.putIfAbsent(val, keys.size()) == null) {
 		    keys.add(val);
 		    return true;
 		}
@@ -20,10 +20,15 @@ class RandomizedSet {
 	}
     
     public boolean remove(int val) {
-        if(map.remove(val) == null) {
-            return false;
-        }
-        keys.remove((Integer)val);
+        Integer idx = map.get(val);
+        if (idx == null) return false;
+
+        int v = keys.get(keys.size() - 1);
+        keys.set(idx, v);
+        map.put(v, idx);
+
+        keys.remove(keys.size() - 1);
+        map.remove(val);
         return true;
     }
     
