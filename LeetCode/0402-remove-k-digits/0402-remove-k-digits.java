@@ -34,9 +34,9 @@
 
             StringBuilder sb = new StringBuilder();
             while(!stack.isEmpty()) {
-                sb.insert(0, stack.pop());
+                sb.append(stack.pop());
             }
-            
+            sb.reverse();
             while(sb.length() > 0 && sb.charAt(0) == '0') {
                 sb.deleteCharAt(0);
             }
