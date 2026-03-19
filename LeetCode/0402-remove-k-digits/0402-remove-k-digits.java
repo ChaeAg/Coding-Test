@@ -11,15 +11,15 @@
                 }
 
                 while(!stack.isEmpty()) {
-                    int n = stack.peek();
+                    int n = stack.pop();
                     if(c - '0' < n) {
-                        stack.pop();
                         k--;
                         if(k == 0) {
                             isDone = true;
                             break;
                         }
                     } else {
+                        stack.push(n);
                         break;
                     }
                 }
