@@ -2,7 +2,6 @@ class Solution {
     int[] graph;
     int n;
     List<List<String>> result = new ArrayList<>();
-
     public List<List<String>> solveNQueens(int n) {
         if(n == 1) {
             result.add(List.of("Q"));
