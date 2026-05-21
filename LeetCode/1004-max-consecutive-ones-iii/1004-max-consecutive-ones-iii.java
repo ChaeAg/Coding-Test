@@ -6,11 +6,8 @@ class Solution {
         Queue<Integer> que = new LinkedList<>();
         for(int num : nums) {
             if(k == 0) {
-                if(num == 1) {
-                    total_len++;
-                } else {
-                    total_len = 0;
-                }
+                if(num == 1) total_len++;
+                else total_len = 0;
                 max = Math.max(max, total_len);
                 continue;
             }
