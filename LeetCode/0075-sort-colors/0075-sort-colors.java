@@ -1,5 +1,5 @@
 class Solution {
-    public int[] sortColors(int[] nums) {
+    public void sortColors(int[] nums) {
         int c0 = 0, c1 = 0, c2 = 0;
         for(int num : nums) {
             if(num == 0) c0++;
@@ -16,7 +16,5 @@ class Solution {
                 nums[i] = 2;
             }
         }
-
-        return nums;
     }
 }
