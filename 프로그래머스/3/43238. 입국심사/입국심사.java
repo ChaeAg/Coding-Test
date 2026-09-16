@@ -1,30 +1,26 @@
 import java.util.*;
 class Solution {
     public long solution(int n, int[] times) {
-        long answer = Long.MAX_VALUE;
+        long simsaCount = (long)times.length;
+        long end = 1000000000L * n / simsaCount;
+        long start = 0L;
+        long mid = 0L;
         
-        Arrays.sort(times);
-        
-        long left = times[0];
-        long right = (long)times[times.length-1] * n;
-        
-        while(left <= right) {
-            long mid = (left+right) / 2;
-            long cnt = 0;
+        while(start < end) {
+            mid = (start + end) / 2;
             
+            long c = 0L;
             for(int t : times) {
-                cnt += mid / t;    
+                c += mid / t;
             }
             
-            if(cnt < n) {
-                left = mid+1;
-            }
-            else {
-                answer = Math.min(answer, mid);
-                right = mid-1;
+            if(c < n) {
+                start = mid+1;
+            } else {
+                end = mid;
             }
         }
         
-        return answer;
+        return start;
     }
 }
